@@ -1,0 +1,24 @@
+﻿@page "/Dashboard/{email}"
+@inject IOperationServices _Operations
+@inject NavigationManager Navigetion
+<h3>Dashboard</h3>
+<br />
+<div class=" card">
+    <h3>Welcome @Mydetails.FullName</h3>
+    <div class="col-10">
+        @Mydetails.AccountNumber
+    </div>
+    <div class="col-10">
+        @Mydetails.Balance
+    </div>
+</div>
+
+    @code {
+        public AcctHolder Mydetails { get; set; }
+        [Parameter]
+        public string email { get; set; }
+        protected override async Task OnInitializedAsync()
+        {
+            Mydetails = await _Operations.GetAcctByEmail(email);
+        }
+    }

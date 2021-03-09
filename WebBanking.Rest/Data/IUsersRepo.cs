@@ -8,6 +8,7 @@ namespace WebBanking.Rest.Data
 {
    public  interface IUsersRepo
     {
+        public Task<bool> CheckEmailExistance(string email);
         public Task<AcctHolder> SaveUsers(AcctHolder userTosave);
         public Task< CableRecharge> SaveCableRecharges(CableRecharge AddRecord);
         public Task<AcctHolder> DeleteUsers(int userToDelete);
@@ -18,7 +19,8 @@ namespace WebBanking.Rest.Data
         public Task<Transactions> GetTransaction(int TransactionId);
         public Task<IEnumerable<Transactions>> GetTransactions(int AcctNo);
         public Task<AcctHolder> GetAccount(Guid CustomId);
-        public Task<bool> ConfirmTransaction (int AccountNo,int pin);
+        public Task<bool> ConfirmTransaction (Guid IdentityNo,int pin);
+        public Task<AcctHolder> GetAcctByEmail(string email);
         public Task<Transfer> GetTransfer(int Id);
         public Task<IEnumerable<Transfer>> GetTransfers(int AccountNo);
         public Task< CableRecharge> GetCableRecharge(int Id);

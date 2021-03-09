@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebBanking.Rest", "WebBanking.Rest\WebBanking.Rest.csproj", "{0CB7F0A5-9D2D-4571-AFBD-481F2C0F29EC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebBanking.Web", "WebBanking.Web\WebBanking.Web.csproj", "{8941AAC1-1302-44DD-B2CB-F976485BFB55}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebBanking.Presentation", "WebBanking.Presentation\WebBanking.Presentation.csproj", "{5532E26F-3E1E-4E31-ABF0-4363281BA604}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{0CB7F0A5-9D2D-4571-AFBD-481F2C0F29EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0CB7F0A5-9D2D-4571-AFBD-481F2C0F29EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0CB7F0A5-9D2D-4571-AFBD-481F2C0F29EC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8941AAC1-1302-44DD-B2CB-F976485BFB55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8941AAC1-1302-44DD-B2CB-F976485BFB55}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8941AAC1-1302-44DD-B2CB-F976485BFB55}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8941AAC1-1302-44DD-B2CB-F976485BFB55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5532E26F-3E1E-4E31-ABF0-4363281BA604}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5532E26F-3E1E-4E31-ABF0-4363281BA604}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5532E26F-3E1E-4E31-ABF0-4363281BA604}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5532E26F-3E1E-4E31-ABF0-4363281BA604}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

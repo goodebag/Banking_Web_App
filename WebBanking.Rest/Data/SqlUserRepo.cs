@@ -16,9 +16,22 @@ namespace WebBanking.Rest.Data
             this.context = context;
         }
 
-        public async Task<bool> ConfirmTransaction(int AccountNo, int pin)
+        public async Task<bool> CheckEmailExistance(string email)
         {
-            var Result = await context.Users.FirstOrDefaultAsync(whom => whom.AccountNumber== AccountNo);
+            bool EmailExist;
+           var user = await context.Users.FirstOrDefaultAsync(whoose => whoose.Email == email);
+            if (user != null)
+            {
+                EmailExist = true;
+            }
+            else { EmailExist = false; }
+
+            return EmailExist;
+        }
+
+        public async Task<bool> ConfirmTransaction(Guid IdentityNo, int pin)
+        {
+            var Result = await context.Users.FirstOrDefaultAsync(whom => whom.IdentityId== IdentityNo);
             if (Result.Pin.Equals(pin))
             {
                 return true;
@@ -40,6 +53,12 @@ namespace WebBanking.Rest.Data
             var user = await context.Users
             .FirstOrDefaultAsync(whom => whom.IdentityId == CustomId);
             return user;
+        }
+
+        public async Task<AcctHolder> GetAcctByEmail(string email)
+        {
+            var result= await context.Users.FirstOrDefaultAsync(whom => whom.Email == email);
+            return result;
         }
 
         public async Task<AirtimeTopUp> GetAirtimeTopUp(int Id)

@@ -9,8 +9,8 @@ namespace WebBanking.Rest.Models
     public class AcctHolder:BaseEntity
     { 
         public int Id { get; set; }
-        public int AccountNumber { get; set; }
-        public int Balance { get; set; }
+        public double AccountNumber { get; set; }
+        public double Balance { get; set; }
         public string FullName { get; set; }
         public string photopath { get; set; }
         public int Pin { get; set; }
@@ -18,6 +18,8 @@ namespace WebBanking.Rest.Models
         [ForeignKey("TransactionId")]
         public virtual IList <Transactions> Transactions {get;set;}
         public Guid IdentityId { get; set; }
+        public double phonenumber { get; set; }
+        public string Email { get; set; }
 
     }
 }

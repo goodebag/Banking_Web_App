@@ -1,0 +1,39 @@
+﻿@page "/transfer/{id}"
+@inherits TransferDetailsBase
+
+
+<EditForm Model="@transfer">
+    <h3>TransferDetails</h3>
+    <hr />
+    <div class="form-group row">
+        <label for="AcctNo" class="col-sm-2 col-form-label">
+            Beneficiary's Account No
+        </label>
+        <div class="col-sm-10">
+            <InputNumber id="AcctNo" class="form-control" placeholder="Account Number"
+                         @bind-Value="transfer.ReciverAccountNo" />
+
+        </div>
+        <label for="Amount" class="col-sm-2 col-form-label">
+            Amount To Send
+        </label>
+        <div class="col-sm-10">
+            <InputNumber id="Amount" class="form-control" placeholder="Amount"
+                         @bind-Value="transfer.Amount" />
+
+        </div>
+        <label for="bank" class="col-sm-2 col-form-label">
+            Beneficiary's Bank
+        </label>
+        <div class="col-sm-10">
+            <InputSelect id="bank" class="form-control"
+                         @bind-Value="transfer.WhichBank">
+                @foreach (var bank in Banks)
+                {
+                    <option disabled value="@bank">@bank.ToString()</option>
+                }
+            </InputSelect>
+
+        </div>
+    </div>
+</EditForm>

@@ -1,0 +1,63 @@
+﻿@page "/Login"
+@inject NavigationManager Navigation
+@inject IOperationServices _Operations
+
+<EditForm Model="registerModel" OnValidSubmit="SiginUser">
+    <div style="margin:auto">
+        <div class="Customize-2">
+
+            <h3 class="position-relative text-center">Login</h3>
+            <hr />
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <label for="Email" class="col-sm-10 col-form-label" style="width:inherit">
+                Email
+            </label>
+            <div class="col-sm-10">
+                <RadzenTextBox id="Email" class="form-control" placeholder="Your Email"
+                               @bind-Value="registerModel.Email" />
+            </div>
+
+            <label for="password" class="col-sm-10 col-form-label" style="width:inherit">
+                Password
+            </label>
+            <div class="col-sm-10">
+                <RadzenTextBox id="password" class=" form-control" placeholder="Your Password"
+                               @bind-Value="registerModel.Password" />
+            </div>
+
+            <hr />
+            <div class="col-sm-10">
+                <RadzenButton ButtonType="Radzen.ButtonType.Submit" Text="Login" ButtonStyle="Radzen.ButtonStyle.Primary" class="btn-block mr-2" />
+            </div>
+            <hr />
+            <label class="col-sm-10 position-relative text-center text-danger">Not yet User?</label>
+            <div class="col-sm-10">
+                <RadzenButton ButtonType="Radzen.ButtonType.Button" Text="Register"
+                              ButtonStyle="Radzen.ButtonStyle.Secondary" class="btn-block mr-2" Click="GotoRegister" />
+            </div>
+
+
+        </div>
+    </div>
+</EditForm>
+@code{
+
+    protected LoginModel registerModel { get; set; } = new LoginModel();
+
+    public async Task SiginUser()
+    {
+        var UserSignedIn = await _Operations.SignIn(registerModel);
+        if (UserSignedIn != null)
+        {
+            Navigation.NavigateTo($"/Dashboard/{UserSignedIn.IdentityId}");
+        }
+    }
+
+    public void GotoRegister()
+    {
+        Navigation.NavigateTo("/Register");
+    }
+
+}
