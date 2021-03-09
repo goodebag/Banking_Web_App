@@ -19,6 +19,212 @@ namespace WebBanking.Rest.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("WebBanking.Rest.Data.MyRole", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedName")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles");
+                });
+
+            modelBuilder.Entity("WebBanking.Rest.Data.MyUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("AcctLinkingId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("FullName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("PhotoUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers");
+                });
+
             modelBuilder.Entity("WebBanking.Rest.Models.AcctHolder", b =>
                 {
                     b.Property<int>("Id")
@@ -26,14 +232,17 @@ namespace WebBanking.Rest.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AccountNumber")
-                        .HasColumnType("int");
+                    b.Property<double>("AccountNumber")
+                        .HasColumnType("float");
 
-                    b.Property<int>("Balance")
-                        .HasColumnType("int");
+                    b.Property<double>("Balance")
+                        .HasColumnType("float");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FullName")
                         .HasColumnType("nvarchar(max)");
@@ -50,6 +259,9 @@ namespace WebBanking.Rest.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<double>("phonenumber")
+                        .HasColumnType("float");
+
                     b.Property<string>("photopath")
                         .HasColumnType("nvarchar(max)");
 
@@ -61,14 +273,15 @@ namespace WebBanking.Rest.Migrations
                         new
                         {
                             Id = 1,
-                            AccountNumber = 20005,
-                            Balance = 50000,
-                            CreatedAt = new DateTime(2021, 1, 10, 16, 10, 3, 391, DateTimeKind.Utc).AddTicks(1636),
+                            AccountNumber = 20005.0,
+                            Balance = 50000.0,
+                            CreatedAt = new DateTime(2021, 1, 22, 11, 4, 55, 926, DateTimeKind.Utc).AddTicks(7888),
                             FullName = "chima",
                             IdentityId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Pin = 2020,
                             TransactionId = 0,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            phonenumber = 0.0,
                             photopath = "image2.jpg"
                         });
                 });
@@ -109,7 +322,7 @@ namespace WebBanking.Rest.Migrations
                         {
                             Id = 1,
                             Amount = 500,
-                            CreatedAt = new DateTime(2021, 1, 10, 16, 10, 3, 395, DateTimeKind.Utc).AddTicks(1339),
+                            CreatedAt = new DateTime(2021, 1, 22, 11, 4, 55, 930, DateTimeKind.Utc).AddTicks(114),
                             PhoneNo = 9094096185.0,
                             SenderId = 1,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -155,7 +368,7 @@ namespace WebBanking.Rest.Migrations
                             Amount = 2900,
                             CableNo = 9012345,
                             CableType = 1,
-                            CreatedAt = new DateTime(2021, 1, 10, 16, 10, 3, 396, DateTimeKind.Utc).AddTicks(1534),
+                            CreatedAt = new DateTime(2021, 1, 22, 11, 4, 55, 930, DateTimeKind.Utc).AddTicks(7832),
                             SenderId = 1,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
@@ -191,7 +404,7 @@ namespace WebBanking.Rest.Migrations
                         {
                             Id = 1,
                             Amount = 1000,
-                            CreatedAt = new DateTime(2021, 1, 10, 16, 10, 3, 395, DateTimeKind.Utc).AddTicks(5702),
+                            CreatedAt = new DateTime(2021, 1, 22, 11, 4, 55, 930, DateTimeKind.Utc).AddTicks(3437),
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             WithdrawerId = 1
                         });
@@ -232,7 +445,7 @@ namespace WebBanking.Rest.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2021, 1, 10, 16, 10, 3, 396, DateTimeKind.Utc).AddTicks(6423),
+                            CreatedAt = new DateTime(2021, 1, 22, 11, 4, 55, 931, DateTimeKind.Utc).AddTicks(1566),
                             GetTransactionType = 1,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = 20005,
@@ -241,7 +454,7 @@ namespace WebBanking.Rest.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2021, 1, 10, 16, 10, 3, 396, DateTimeKind.Utc).AddTicks(6905),
+                            CreatedAt = new DateTime(2021, 1, 22, 11, 4, 55, 931, DateTimeKind.Utc).AddTicks(1892),
                             GetTransactionType = 3,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = 20005,
@@ -250,7 +463,7 @@ namespace WebBanking.Rest.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2021, 1, 10, 16, 10, 3, 396, DateTimeKind.Utc).AddTicks(7019),
+                            CreatedAt = new DateTime(2021, 1, 22, 11, 4, 55, 931, DateTimeKind.Utc).AddTicks(1949),
                             GetTransactionType = 4,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = 20005,
@@ -259,7 +472,7 @@ namespace WebBanking.Rest.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2021, 1, 10, 16, 10, 3, 396, DateTimeKind.Utc).AddTicks(7105),
+                            CreatedAt = new DateTime(2021, 1, 22, 11, 4, 55, 931, DateTimeKind.Utc).AddTicks(1989),
                             GetTransactionType = 2,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = 20005,
@@ -303,12 +516,63 @@ namespace WebBanking.Rest.Migrations
                         {
                             Id = 1,
                             Amount = 2000,
-                            CreatedAt = new DateTime(2021, 1, 10, 16, 10, 3, 394, DateTimeKind.Utc).AddTicks(5595),
+                            CreatedAt = new DateTime(2021, 1, 22, 11, 4, 55, 929, DateTimeKind.Utc).AddTicks(3594),
                             ReciverAccountNo = 20006,
                             SenderId = 1,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             WhichBank = 3
                         });
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
+                {
+                    b.HasOne("WebBanking.Rest.Data.MyRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
+                {
+                    b.HasOne("WebBanking.Rest.Data.MyUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
+                {
+                    b.HasOne("WebBanking.Rest.Data.MyUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
+                {
+                    b.HasOne("WebBanking.Rest.Data.MyRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebBanking.Rest.Data.MyUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
+                {
+                    b.HasOne("WebBanking.Rest.Data.MyUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("WebBanking.Rest.Models.AirtimeTopUp", b =>

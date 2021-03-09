@@ -157,7 +157,7 @@ namespace WebBanking.Rest.Controllers
                 {
                     return NotFound();
                 }
-                result.Transactions = (IList<Transactions>)await _usersRepo.GetTransactions(result.AccountNumber);
+                result.Transactions = (IList<Transactions>)await _usersRepo.GetTransactions((int)result.AccountNumber);
                 return result;
             }
             catch (Exception e)
@@ -186,11 +186,11 @@ namespace WebBanking.Rest.Controllers
             }
         }
 
-        [HttpGet("{AcctNo:int}/{pin:int}")]
+        [HttpGet("{token}")]
         public async Task<bool> ComfirmTransaction(ComfirmationToken token)
         {
 
-            var TrueOrFalse = await _usersRepo.ConfirmTransaction(token.AcctNo, token.pin);
+            var TrueOrFalse = await _usersRepo.ConfirmTransaction(token.AcctIdentityNo, token.pin);
             return TrueOrFalse;
         }
         [HttpGet("{Id:int}")]

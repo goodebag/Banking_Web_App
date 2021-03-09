@@ -7,7 +7,7 @@ namespace WebBanking.Rest.Models
 {
     public class ComfirmationToken
     {
-        public int AcctNo { get; set; }
+        public Guid AcctIdentityNo { get; set; }
         public int pin { get; set; }
     }
 }

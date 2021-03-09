@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +10,7 @@ using static WebBanking.Rest.Models.Transactions;
 
 namespace WebBanking.Rest.Data
 {
-    public class AppDbContext:DbContext
+    public class AppDbContext:IdentityDbContext<MyUser,MyRole,int>
     {
         public AppDbContext(DbContextOptions<AppDbContext> Options) : base(Options)
         {
@@ -22,7 +24,7 @@ namespace WebBanking.Rest.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+            base.OnModelCreating(modelBuilder);
             //modelBuilder.Entity<Transactions>().HasData(new Transactions { Id = 1,  GetTransactionType = TransactionType.CashWithdrawal });
             //modelBuilder.Entity<Transactions>().HasData(new Transactions { Id = 2, UserId = 20005, GetTransactionType = TransactionType.Tranfer });
             //modelBuilder.Entity<Transactions>().HasData(new Transactions { Id = 3, UserId = 20005, GetTransactionType = TransactionType.AirtimeTopUp });
@@ -46,7 +48,7 @@ namespace WebBanking.Rest.Data
                 SenderId = 1,
                 ReciverAccountNo = 20006,
                 WhichBank = Bank.FCMB,
-                 CreatedAt = DateTime.UtcNow
+                CreatedAt = DateTime.UtcNow
             });
 
             modelBuilder.Entity<AirtimeTopUp>().HasData(new AirtimeTopUp

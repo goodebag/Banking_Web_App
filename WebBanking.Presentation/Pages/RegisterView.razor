@@ -1,0 +1,112 @@
+﻿@page "/Register"
+@inject NavigationManager Navigation
+@inject IOperationServices _Operations
+@inject AuthenticationStateProvider Authentication
+@inject Blazored.SessionStorage.ISessionStorageService sessionStorage
+
+<EditForm Model="registerModel" OnValidSubmit="createUser">
+    <h3 class="position-relative text-center">Welcome we are happy to have you here</h3>
+
+    <hr />
+    <div style="margin:auto">
+        <div class="card Customize">
+
+            <h3 class="position-relative text-center">Register</h3>
+            <hr />
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <label for="FirstName" class=" col-sm-10 col-form-label" style="width:inherit">
+                FirstName
+            </label>
+            <div class="col-sm-10">
+                <RadzenTextBox id="FirstName" class=" form-control" placeholder="Your FirstNames"
+                               @bind-Value="registerModel.FirstName" />
+            </div>
+            <label for="LastName" class="col-sm-10 col-form-label" style="width: auto">
+                LastName
+            </label>
+            <div class="col-sm-10">
+                <RadzenTextBox id="LastName" class=" form-control" placeholder="Your LastNames"
+                               @bind-Value="registerModel.LastName" />
+            </div>
+            <label for="Email" class="col-sm-10 col-form-label" style="width:inherit">
+                Email
+            </label>
+            <div class="col-sm-10">
+                <RadzenTextBox id="Email" class="form-control" placeholder="Your Email"
+                               @bind-Value="registerModel.Email" />
+            </div>
+            <label for="UserName" class="col-sm-10 col-form-label" style="width:inherit">
+                UserName
+            </label>
+            <div class="col-sm-10">
+                <RadzenTextBox id="UserName" class=" form-control" placeholder="Your UserName"
+                               @bind-Value="registerModel.UserName" />
+            </div>
+            <label for="password" class="col-sm-10 col-form-label" style="width:inherit">
+                Password
+            </label>
+            <div class="col-sm-10">
+                <RadzenTextBox id="password" class=" form-control" placeholder="Your Password"
+                               @bind-Value="registerModel.Password" />
+            </div>
+            <label for="PhoneNumber" class="col-sm-10 col-form-label" style="width:inherit">
+                PhoneNumber
+            </label>
+            <div class="col-sm-10">
+                <RadzenNumeric id="PhoneNumber" class="form-control" placeholder="Your PhoneNumber"
+                               @bind-Value="registerModel.PhoneNumber" />
+            </div>
+
+            <label for="pin" class="col-sm-10 col-form-label" style="width:inherit">
+                Pin
+            </label>
+            <div class="col-sm-10">
+                <RadzenNumeric id="pin" class="form-control" placeholder="comfirmation pin"
+                               @bind-Value="registerModel.Pin" />
+            </div>
+
+            <hr />
+            <div class="col-sm-10">
+                <RadzenButton ButtonType="Radzen.ButtonType.Submit" Text="Register" ButtonStyle="Radzen.ButtonStyle.Primary" class="btn-block mr-2" />
+            </div>
+            <hr />
+            <label class="col-sm-10 position-relative text-center text-danger">Already a User?</label>
+            <div class="col-sm-10">
+                <RadzenButton ButtonType="Radzen.ButtonType.Button" Text="Login" ButtonStyle="Radzen.ButtonStyle.Secondary" class="btn-block mr-2" Click="GotoLogin" />
+            </div>
+        </div>
+ </div>
+
+</EditForm>
+@code{
+
+    protected RegModel registerModel { get; set; } = new RegModel();
+    public string photoName { get; set; } = "Sorry No Image Here";
+
+
+    public async Task createUser()
+    {
+        var exist = await _Operations.EmailExistance(registerModel.Email);
+        if (exist.Equals(false))
+        {
+            var details = await _Operations.SignUp(registerModel);
+            if (details != null)
+            {
+                ((CustomAuthenticationStateProvider)Authentication).MarkedAsAuthenticated(registerModel.Email);
+                Navigation.NavigateTo($"/Dashboard/{details.Email}");
+               await sessionStorage.SetItemAsync("emailAddress", registerModel.Email);
+            }
+        }
+        else
+        {
+            registerModel = new RegModel();
+        }
+    }
+
+    public void GotoLogin()
+    {
+        Navigation.NavigateTo("/Login");
+    }
+
+}
